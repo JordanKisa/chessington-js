@@ -7,6 +7,6 @@ export default class Rook extends Piece {
     }
 
     getAvailableMoves(board) {
-        return pieceMover.generateLateralMovements(board,this)
+        return pieceMover.generateLateralMovements(board,this,true)
     }
 }
