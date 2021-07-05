@@ -43,4 +43,8 @@ export default class Board {
             this.currentPlayer = (this.currentPlayer === Player.WHITE ? Player.BLACK : Player.WHITE);
         }
     }
+
+    validIndex(index) {
+        return (index >= 0) && (index < GameSettings.BOARD_SIZE);
+    }
 }
