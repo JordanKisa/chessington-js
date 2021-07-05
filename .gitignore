@@ -60,3 +60,7 @@ typings/
 # Babel build Output
 dist/
 
+
+.idea/chessington-js.iml
+
+.idea/
