@@ -17,6 +17,9 @@ export default class Pawn extends Piece {
             }
         } else if (this.player === Player.BLACK && position.row > 0){
             moves.push(Square.at(position.row-1, position.col))
+            if (position.row === 6){
+                moves.push((Square.at(position.row-2,position.col)))
+            }
         }
         return moves;
     }
