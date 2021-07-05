@@ -9,14 +9,34 @@ export default class Rook extends Piece {
     getAvailableMoves(board) {
         var position = board.findPiece(this)
         var moves = []
-        for(let j = -7; j < 8; j++){
-            if (position.col + j < 0 || position.col + j > 7 || j === 0){
-                continue
+        //up
+        for(let j = 1; j < 8; j++){
+            if (!board.validIndex(position.col+j) ||
+                board.getPiece(Square.at(position.row, position.col+j)) !== undefined){
+                break
             }
             moves.push(Square.at(position.row ,position.col+j))
         }
-        for (let i = -7; i < 8; i++){
-            if (position.row + i < 0 || position.row + i > 7 || i === 0){
+        //down
+        for(let j = -1; j > -8; j--){
+            if (!board.validIndex(position.col+j) ||
+                board.getPiece(Square.at(position.row, position.col+j)) !== undefined){
+                break
+            }
+            moves.push(Square.at(position.row ,position.col+j))
+        }
+        //left
+        for (let i = 1; i < 8; i++){
+            if (!board.validIndex(position.row+i) ||
+                board.getPiece(Square.at(position.row+i, position.col)) !== undefined){
+                continue
+            }
+            moves.push(Square.at(position.row+i,position.col))
+        }
+        //right
+        for (let i = -1; i > -8; i--){
+            if (!board.validIndex(position.row+i) ||
+                board.getPiece(Square.at(position.row+i, position.col)) !== undefined){
                 continue
             }
             moves.push(Square.at(position.row+i,position.col))
