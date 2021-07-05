@@ -1,4 +1,5 @@
 import Piece from './piece';
+import Square from "../square";
 
 export default class Rook extends Piece {
     constructor(player) {
@@ -6,6 +7,21 @@ export default class Rook extends Piece {
     }
 
     getAvailableMoves(board) {
-        return new Array(0);
+        var position = board.findPiece(this)
+        var moves = []
+        for(let j = -7; j < 8; j++){
+            if (position.col + j < 0 || position.col + j > 7 || j === 0){
+                continue
+            }
+            moves.push(Square.at(position.row ,position.col+j))
+        }
+        for (let i = -7; i < 8; i++){
+            if (position.row + i < 0 || position.row + i > 7 || i === 0){
+                continue
+            }
+            moves.push(Square.at(position.row+i,position.col))
+        }
+
+        return moves
     }
 }
