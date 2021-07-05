@@ -7,8 +7,8 @@ export default class King extends Piece {
     }
 
     getAvailableMoves(board) {
-        var position = board.findPiece(this)
-        var moves = []
+        const position = board.findPiece(this);
+        const moves = [];
         for(let i = -1; i < 2; i++){
             for(let j = -1; j < 2; j++){
                 if((i === 0 && j === 0) ||

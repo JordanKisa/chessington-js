@@ -44,7 +44,8 @@ export default class Board {
         }
     }
 
-    validIndex(index) {
-        return (index >= 0) && (index < GameSettings.BOARD_SIZE);
+    validIndex(rowindex, columnindex) {
+        return (rowindex >= 0) && (rowindex < GameSettings.BOARD_SIZE) &&
+            (columnindex >= 0) && (columnindex < GameSettings.BOARD_SIZE);
     }
 }
