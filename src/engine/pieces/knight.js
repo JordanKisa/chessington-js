@@ -1,5 +1,7 @@
 import Piece from './piece';
 import Square from "../square";
+import Board from "../board";
+import King from "./king";
 
 export default class Knight extends Piece {
     constructor(player) {
@@ -18,13 +20,23 @@ export default class Knight extends Piece {
             ]
 
         for(var i = 0; i < lmoves.length; i++){
-            var xdisplacemant = lmoves[i][0]
-            var ydisplacement = lmoves[i][1]
+            const xdisplacemant = lmoves[i][0]
+            const ydisplacement = lmoves[i][1]
 
-            if(position.row + xdisplacemant < 0 ||
-                position.row + xdisplacemant > 7 ||
-                position.col + ydisplacement < 0 ||
-                position.col + ydisplacement > 7){
+            if(!board.validIndex(
+                position.row+xdisplacemant,
+                position.col + ydisplacement)){
+                continue
+            }
+
+            const opposing = board.getPiece(Square.at(
+                position.row+xdisplacemant,
+                position.col+ydisplacement))
+
+            if (opposing !== undefined &&
+                (opposing.player === this.player ||
+                opposing instanceof King)){
+
                 continue
             }
 
