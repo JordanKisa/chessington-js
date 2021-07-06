@@ -12,10 +12,17 @@ export default class King extends Piece {
         for(let i = -1; i < 2; i++){
             for(let j = -1; j < 2; j++){
                 if((i === 0 && j === 0) ||
-                    position.row + i < 0 ||
-                    position.row + i > 7 ||
-                    position.col + j < 0 ||
-                    position.col + j > 7){
+                    !board.validIndex(position.row+i, position.col+j)){
+                    continue
+                }
+                const opposing = board.getPiece(Square.at(
+                    position.row+i,
+                    position.col+j))
+
+                if (opposing !== undefined &&
+                    (opposing.player === this.player ||
+                        opposing instanceof King)){
+
                     continue
                 }
                 moves.push(Square.at(position.row+i,position.col+j))
