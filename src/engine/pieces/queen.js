@@ -7,8 +7,8 @@ export default class Queen extends Piece {
     }
 
     getAvailableMoves(board) {
-        const lateral = pieceMover.generateLateralMovements(board,this)
-        const diagonal = pieceMover.generateDiagonalMovements(board,this)
+        const lateral = pieceMover.generateLateralMovements(board,this,true)
+        const diagonal = pieceMover.generateDiagonalMovements(board,this,true)
         return [].concat(lateral,diagonal);
     }
 }

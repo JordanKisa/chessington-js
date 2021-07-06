@@ -73,40 +73,61 @@ export default class pieceMover{
 
     }
 
-    static generateDiagonalMovements(board, piece){
+    static generateDiagonalMovements(board, piece, canCapture){
         const position = board.findPiece(piece);
         const moves = [];
         // UP /
         for(let j = 1; j < 8; j++){
+            const captured = pieceMover.capturable(board, piece, position.row+j, position.col+j)
             if (!board.validIndex(position.row+j,position.col+j) ||
-                board.getPiece(Square.at(position.row+j, position.col+j)) !== undefined){
+                (board.getPiece(Square.at(position.row+j, position.col+j)) !== undefined &&
+                    !(canCapture && captured))){
                 break
             }
+
             moves.push(Square.at(position.row+j ,position.col+j))
+            if (captured){
+                break
+            }
         }
         // down /
         for(let j = -1; j > -8; j--){
+            const captured = pieceMover.capturable(board, piece, position.row+j, position.col+j)
             if (!board.validIndex(position.row+j,position.col+j) ||
-                board.getPiece(Square.at(position.row+j, position.col+j)) !== undefined){
+                (board.getPiece(Square.at(position.row+j, position.col+j)) !== undefined &&
+                    !(canCapture && captured))){
                 break
             }
             moves.push(Square.at(position.row+j ,position.col+j))
+            if (captured){
+                break
+            }
         }
         // Up \
         for (let i = 1; i < 8; i++){
+            const captured = pieceMover.capturable(board, piece, position.row+i, position.col-i)
             if (!board.validIndex(position.row+i,position.col-i) ||
-                board.getPiece(Square.at(position.row+i, position.col-i)) !== undefined){
+                (board.getPiece(Square.at(position.row+i, position.col-i)) !== undefined &&
+                    !(canCapture && captured))){
                 break
             }
             moves.push(Square.at(position.row+i,position.col-i))
+            if (captured){
+                break
+            }
         }
         // down \
         for (let i = -1; i > -8; i--){
+            const captured = pieceMover.capturable(board, piece, position.row+i, position.col-i)
             if (!board.validIndex(position.row+i,position.col-i) ||
-                board.getPiece(Square.at(position.row+i, position.col-i)) !== undefined){
+                (board.getPiece(Square.at(position.row+i, position.col-i)) !== undefined &&
+                    !(canCapture && captured))){
                 break
             }
             moves.push(Square.at(position.row+i,position.col-i))
+            if (captured){
+                break
+            }
         }
 
 
